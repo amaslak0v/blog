@@ -11,4 +11,9 @@ install-dep:
 flask-start:
 	flask run
 
-	
+docker-build:
+	docker build -t blog .
+
+docker-run:
+	docker run -p 80:5000 -it blog
+
