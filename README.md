@@ -10,5 +10,8 @@ If ./venv dir not exist:
 EKS
 CI
 pre-commit
+https
+nginx proxy
+healthcheck
 
 
