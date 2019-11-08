@@ -1,6 +1,11 @@
 
+# Install virtualenv dir
 install-venv:
 	virtualenv -p python3.7 venv
+
+# Activate virtualenv
+start-venv:
+	source venv/bin/activate
 
 save-dep:
 	pip freeze > requirements.txt
