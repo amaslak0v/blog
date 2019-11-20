@@ -1,3 +1,7 @@
+NAME   := 025772230981.dkr.ecr.eu-central-1.amazonaws.com/blog
+TAG    := $(shell git --no-pager log -n 1 --pretty=format:'%h-%cd' --date=short ./)
+
+# TAG ?= $(shell git --no-pager log -n 1 --pretty=format:'%h-%cd' --date=short ./)
 
 # Install virtualenv dir
 install-venv:
@@ -13,12 +17,20 @@ save-dep:
 install-dep:
 	pip install -r requirements.txt
 
-flask-start:
-	flask run
+# TODO: test
+run:
+	flask run 
 
-docker-build:
-	docker build -t blog .
+dbuild:
+	@docker build -t ${NAME}:${TAG} .
+	@docker tag ${NAME}:${TAG} ${NAME}:latest
 
-docker-run:
-	docker run -p 80:5000 -it blog
+drun:
+	@docker run -p 80:5000 -it ${NAME}:latest
 
+dpush:
+	@echo "> Pushing to ECR"
+	@docker push ${NAME}:${TAG}
+
+deploy: dbuild dpush
+	
