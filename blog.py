@@ -1,12 +1,13 @@
 from flask import Flask, escape, request, render_template, redirect
 
 app = Flask(__name__)
+app_version = 'v1.0'
 cv_google_doc_link = 'https://docs.google.com/document/d/1z9YO3m5PKo_EQzLhgE4dDuF1bZDK6WB4zihNsBTNupY' + '/preview'
 
 
 @app.route('/')
 def index():
-    return render_template('index.html')
+    return render_template('index.html', app_version=app_version)
 
 @app.route('/me')
 def me():

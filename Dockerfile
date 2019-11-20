@@ -3,4 +3,4 @@ ADD . /blog
 WORKDIR /blog
 EXPOSE 80
 RUN pip install -r requirements.txt
-ENTRYPOINT ["flask", "run", "--host=0.0.0.0", "--port=80"]
+CMD ["flask", "run", "--host=0.0.0.0", "--port=80"]

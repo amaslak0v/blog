@@ -1,10 +1,13 @@
 <!DOCTYPE html>
 <html>
-    <head>
-        <title>Anton's Maslakov Blog</title>
-        <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/style.css') }}">
-    </head>
-    <body>
+    <body class="wrapper"> 
+        <head>
+            <title>Anton's Maslakov Blog</title>
+            <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/style.css') }}">
+            <div class="info">
+                <a class="version">{{ app_version }}</a>
+            </div>
+        </head>
         <header class="header" id="header">
             <div class="face">
                 <a href="{{ url_for('me') }}" style="position:relative">
@@ -22,6 +25,9 @@
                 <ul class="pages">
                     <li><a href="#">Home</a></li>
                     <li><a href="#">Articles</a></li>
+                    <li><a href="#">Travels</a></li>
+                    <li><a href="#">Library</a></li>
+                    <li><a href="#">Films</a></li>
                     <li><a href="{{ url_for('me') }}">About me</a></li>
                     <li><a href="{{ url_for('meme') }}">Meme</a></li>
                 </ul>

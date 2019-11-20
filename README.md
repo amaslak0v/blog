@@ -13,5 +13,6 @@ pre-commit
 https
 nginx proxy
 healthcheck
+show app-version
 
 
