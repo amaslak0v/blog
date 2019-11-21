@@ -22,15 +22,15 @@ run:
 	flask run 
 
 dbuild:
-	@docker build -t ${NAME}:${TAG} .
-	@docker tag ${NAME}:${TAG} ${NAME}:latest
+	@docker build -t ${NAME}:latest .
+	#@docker tag ${NAME}:${TAG} ${NAME}:latest
 
 drun:
 	@docker run -p 80:5000 -it ${NAME}:latest
 
 dpush:
 	@echo "> Pushing to ECR"
-	@docker push ${NAME}:${TAG}
+	@docker push ${NAME}:latest
 
 deploy: dbuild dpush
 	
