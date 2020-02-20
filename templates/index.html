@@ -1,37 +1,9 @@
-<!DOCTYPE html>
-<html>
-    <body class="wrapper">
-        <head>
-            <title>Anton's Maslakov Blog</title>
-            <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/style.css') }}">
-            <div class="info">
-                <a class="version">{{ app_version }}</a>
-            </div>
-        </head>
-        <header class="header" id="header">
-            <div class="face">
-                <a href="{{ url_for('me') }}" style="position:relative">
-                    <img src="{{ url_for('static', filename='images/my_face.jpg') }}" class="photo" alt="Anton Maslakov">
-                </a>
-            </div>
-            <nav>
-                <ul class="media">
-                    <li>
-                        <a class="media-icon" href="https://www.linkedin.com/in/amaslakov/" title="Follow me on Linkedin">Linkedin</a>
-                        <a class="media-icon" href="https://t.me/amaslak0v" title="Follow me on Telegram">Telegram</a>
-                        <a class="media-icon" href="https://twitter.com/intent/follow?screen_name=antoxam97" rel="nofollow" title="Follow me on Twitter">Twitter</a>
-                    </li>
-                </ul>
-                <ul class="pages">
-                    <li><a href="#">Home</a></li>
-                    <li><a href="#">Articles</a></li>
-                    <li><a href="#">Travels</a></li>
-                    <li><a href="#">Library</a></li>
-                    <li><a href="#">Films</a></li>
-                    <li><a href="{{ url_for('me') }}">About me</a></li>
-                    <li><a href="{{ url_for('meme') }}">Meme</a></li>
-                </ul>
-            </nav>
-        </header>
-    </body>
-</html>
+{% extends 'base_template.html' %}
+
+{% block body %}
+<div class="d-flex justify-content-center m-5">
+  <div class="spinner-border text-secondary" role="status">
+    <span class="sr-only">Zzz...</span>
+  </div>
+</div>
+{% endblock %}

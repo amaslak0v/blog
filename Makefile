@@ -6,6 +6,7 @@ TAG    := $(shell git --no-pager log -n 1 --pretty=format:'%h-%cd' --date=short 
 # Install virtualenv dir
 install-venv:
 	virtualenv -p python3.7 venv
+	pip install -r requirements.txt
 
 # Activate virtualenv
 start-venv:
@@ -14,11 +15,8 @@ start-venv:
 save-dep:
 	pip freeze > requirements.txt
 
-install-dep:
-	pip install -r requirements.txt
-
-# TODO: test
-run:
+run: 
+	@echo "use `make start-venv`"
 	flask run 
 
 dbuild:
@@ -26,7 +24,7 @@ dbuild:
 	#@docker tag ${NAME}:${TAG} ${NAME}:latest
 
 drun:
-	@docker run -p 80:5000 -it ${NAME}:latest
+	@docker run -p 80:80 -it ${NAME}:latest
 
 dpush:
 	@echo "> Pushing to ECR"
