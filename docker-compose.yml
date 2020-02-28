@@ -1,8 +1,7 @@
 version: '3'
 services:
   blog:
-    #image: 025772230981.dkr.ecr.eu-central-1.amazonaws.com/blog
-    image: amaslak0v/amaslakov.com:1.1
+    image: amaslak0v/blog:0.1
     restart: always
     expose:
       - "80"

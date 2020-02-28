@@ -1,6 +1,4 @@
 ---
-tasks:
-
   - name: Create dir for https certs
     file:
       path: "{{ nginx_cert_dir }}"
@@ -21,25 +19,11 @@ tasks:
   - name: Create docker-compose file
     template:
       src: docker-compose.yml.j2
-      dest: "{{base_dir}}/docker-compose.yml"
-    notify:
-    - restart containers
-
-  - name: Create a DOS-style text file from a template
-    template:
-      src: docker-compose.yml.j2
-      dest: /share/windows/config.ini
-      newline_sequence: '\r\n'
-
-  - name: Pull default Docker image
-    docker_image:
-      name: "{{ default_container_image }}"
-      source: pull
-
+      dest: "{{ base_dir }}/docker-compose.yml"
 
   - name: Restart services
     docker_compose:
-      project_src: flask
-      build: no
+      project_src: "{{ base_dir }}"
+      build: yes
       restarted: yes
     register: output
