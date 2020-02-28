@@ -1,6 +1,6 @@
 from flask import Flask, escape, request, render_template, redirect
 
-app_version = 'v1.1'
+app_version = 'v0.1'
 
 links = {
 	"cv": "https://docs.google.com/document/d/1z9YO3m5PKo_EQzLhgE4dDuF1bZDK6WB4zihNsBTNupY/preview",

@@ -1,0 +1,19 @@
+version: '3'
+services:
+  blog:
+    image: {{ blog_image_name }}
+    restart: always
+    expose:
+      - "80"
+    environment:
+      - VIRTUAL_HOST=amaslakov.com
+
+# https://github.com/jwilder/nginx-proxy
+  nginx-proxy:
+    image: jwilder/nginx-proxy:{{ nginx_proxy_image_version }}
+    ports:
+      - "80:80"
+      - "443:443"
+    volumes:
+      - /var/run/docker.sock:/tmp/docker.sock:ro
+      # - {{ nginx_cert_dir }}:/etc/nginx/certs

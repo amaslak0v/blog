@@ -1,0 +1,105 @@
+# https://pre-commit.com
+# pip install pre-commit
+
+fail_fast: false
+repos:
+  - repo: https://github.com/pre-commit/pre-commit-hooks
+    rev: v2.3.0
+    hooks:
+      - id: check-yaml
+        description: Attempts to load all yaml files to verify syntax
+
+      - id: check-json
+        description: Attempts to load all json files to verify syntax
+
+      # TODO: Add indent
+      - id: pretty-format-json
+        args: ['--autofix', '--no-sort-keys']
+        description: Checks that all your JSON files are pretty. "Pretty" here means that keys are sorted and indented.
+
+      - id: end-of-file-fixer
+        description: Makes sure files end in a newline and only a newline.
+
+      - id: trailing-whitespace
+        description: Trims trailing whitespace
+
+      - id: mixed-line-ending
+        description: Replaces or checks mixed line ending
+
+      - id: check-case-conflict
+        description: Check for files with names that would conflict on a case-insensitive filesystem like MacOS HFS+ or Windows FAT.
+
+      - id: check-executables-have-shebangs
+        description: Checks that non-binary executables have a proper shebang.
+
+      - id: no-commit-to-branch
+        args: [--branch, master]
+        description: Protect specific branches from direct checkins
+
+      - id: check-merge-conflict
+        description: Check for files that contain merge conflict strings
+
+      - id: detect-aws-credentials
+        args: [--allow-missing-credentials]
+        description: Checks for the existence of AWS secrets that you have set up with the AWS CLI. The following arguments are available
+
+      - id: detect-private-key
+        description: Checks for the existence of private keys.
+
+      - id: check-symlinks
+        description: Checks for symlinks which do not point to anything.
+
+      - id: check-added-large-files
+        args: ['--maxkb=200']
+        description: Prevent giant files from being committed.
+
+  # pip install ansible-lint
+  - repo: https://github.com/ansible/ansible-lint.git
+    rev: v4.1.0
+    hooks:
+      - id: ansible-lint
+        name: Ansible-lint
+        description: This hook runs ansible-lint.
+        entry: ansible-lint
+        language: python
+        files: \.(yaml|yml)$
+
+  # install guide https://github.com/koalaman/shellcheck#installing
+  # brew install shellcheck
+  - repo: https://github.com/detailyang/pre-commit-shell.git
+    rev: 1.0.5
+    hooks:
+    - id: shell-lint
+      args: [--format=json]
+      description: |
+        Bash linter
+        https://github.com/koalaman/shellcheck
+
+  # pip install beautysh
+  - repo: https://github.com/lovesegfault/beautysh.git
+    rev: 5.0.2
+    hooks:
+    - id: beautysh
+      name: beautysh
+      description: |
+        Bash Formatter
+        https://pypi.python.org/pypi/beautysh
+      entry: beautysh
+      language: python
+      types: [shell]
+
+  - repo: https://github.com/jumanjihouse/pre-commit-hooks
+    rev: 1.11.0
+    hooks:
+      #- id: markdownlint # Configure in .mdlrc
+        #description: |
+          #Markdownlint is a ruby tool that examines markdown files against various style rules.
+          #https://github.com/markdownlint/markdownlint/blob/master/docs/RULES.md
+      - id: script-must-have-extension
+  - repo: git://github.com/kintoandar/pre-commit.git
+    rev: v2.1.0
+    hooks:
+    - id: terraform_fmt
+    - id: terraform_validate
+    - id: prometheus_check_rules
+    - id: prometheus_check_config

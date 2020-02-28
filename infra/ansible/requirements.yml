@@ -1,0 +1,15 @@
+# Use this file to add roles from git or from Ansible-galaxy
+# usage example: ansible-galaxy install -r galaxy-deps.yml
+#
+#            ansible-playbook -i "${params.INSTANCE}," ./playbooks/run.yml \
+#                    --extra-vars "roles=galaxy-node_exporter host=all" -u ${ssh_user}
+#
+#
+
+- src: weareinteractive.docker
+  version: master
+  name: galaxy-docker
+
+- src: weareinteractive.docker_compose
+  version: master
+  name: galaxy-docker-compose
