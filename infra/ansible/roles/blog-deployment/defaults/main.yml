@@ -2,5 +2,5 @@ base_dir: "/opt/blog"
 nginx_cert_dir: "{{base_dir}}/certs"
 
 # Docker image versions
-blog_image_version: latest
+#blog_image_version: latest
 nginx_proxy_version: latest

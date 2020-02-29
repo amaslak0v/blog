@@ -22,7 +22,6 @@ def test():
 @app.route('/me')
 def me():
     return redirect(cv_link, code=302)
-    # return render_template('about-me.html')
 
 @app.route('/meme')
 def meme():
