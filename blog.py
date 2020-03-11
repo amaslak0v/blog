@@ -6,7 +6,7 @@ links = {
 	"cv": "https://docs.google.com/document/d/1z9YO3m5PKo_EQzLhgE4dDuF1bZDK6WB4zihNsBTNupY/preview",
 	"telegram": "https://t.me/amaslak0v",
 	"linkedin": "https://www.linkedin.com/in/amaslakov",
-	"twitter": "https://twitter.com/intent/follow?screen_name=antoxam97"
+	"twitter": "https://twitter.com/intent/follow?screen_name=amaslak0v"
 }
 
 app = Flask(__name__)

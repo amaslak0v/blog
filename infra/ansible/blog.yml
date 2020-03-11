@@ -5,7 +5,7 @@
     docker_compose_pip_executable: pip3
     docker_compose_packages: python3-pip
     blog_image_name: amaslak0v/blog
-#    blog_image_version: ""
+    blog_image_version: ""
 
   pre_tasks:
     # The issue is that docker-ce has not been packaged for CentOS 8 yet.
@@ -22,13 +22,13 @@
       pip:
         name: awscli
         executable: pip3
-    tags:
-      - install
+  tags:
+    - install
 
   roles:
-    - galaxy-docker
+    - role: galaxy-docker
       tags: [install]
-    - galaxy-docker-compose
+    - role: galaxy-docker-compose
       tags: [install]
-    - blog-deployment
+    - role: blog-deployment
       tags: [deploy]
