@@ -5,7 +5,7 @@ DOCKER_REPO=amaslak0v
 ### Local
 
 .PHONY: local-init
-init:
+local-init:
 	@echo "Requirements: pip, virtualenv, docker, ansible"
 	virtualenv -p python3.7 venv
 	pip install -r requirements.txt
@@ -29,8 +29,22 @@ build:
 .PHONY: deploy
 deploy: build
 	docker push ${DOCKER_REPO}/blog:${TAG}
-	ansible-playbook -i "amaslakov.com," ./infra/ansible/blog.yml -e "blog_image_version=${TAG}" -u ec2-user --key-file "~/.ssh/amaslakov.com.pem"
+	@echo "Deploying ${DOCKER_REPO}/blog:${TAG}"
+	export ANSIBLE_HOST_KEY_CHECKING=False
+	ansible-playbook -i "amaslakov.com," ./infra/ansible/blog.yml -e "blog_image_version=${TAG}" --tags "deploy" -u ec2-user --key-file "~/.ssh/amaslakov.com.pem" 
 
+.PHONY: fast-deploy
+fast-deploy: 
+	@echo "Deploying ${DOCKER_REPO}/blog:${TAG}"
+	export ANSIBLE_HOST_KEY_CHECKING=False
+	ansible-playbook -i "amaslakov.com," ./infra/ansible/blog.yml -e "blog_image_version=${TAG}" --tags "deploy" -u ec2-user --key-file "~/.ssh/amaslakov.com.pem" 
+
+.PHONY: install-deploy
+install-deploy: build
+	docker push ${DOCKER_REPO}/blog:${TAG}
+	@echo "Deploying ${DOCKER_REPO}/blog:${TAG}"
+	export ANSIBLE_HOST_KEY_CHECKING=False
+	ansible-playbook -i "amaslakov.com," ./infra/ansible/blog.yml -e "blog_image_version=${TAG}" --tags "deploy, install" -u ec2-user --key-file "~/.ssh/amaslakov.com.pem" 
 .PHONY: run
 run:
 	docker run -p 80:80 -it blog:${TAG}
