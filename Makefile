@@ -30,13 +30,13 @@ deploy: build
 	docker push ${DOCKER_REPO}/blog:${TAG}
 	@echo "Deploying ${DOCKER_REPO}/blog:${TAG}"
 	export ANSIBLE_HOST_KEY_CHECKING=False
-	ansible-playbook -i "amaslakov.com," ./infra/ansible/blog.yml -e "blog_image_version=${TAG}" --tags "deploy" -u ec2-user --key-file "~/.ssh/amaslakov.com.pem" 
+	ansible-playbook -i "amaslakov.com," ./infra/ansible/blog.yml -e "blog_image_version=${TAG}" --tags "deploy" -u ec2-user --key-file "~/.ssh/amaslakov.com.pem"
 
 .PHONY: fdeploy
-fdeploy: 
+fdeploy:
 	@echo "Deploying ${DOCKER_REPO}/blog:${TAG}"
 	export ANSIBLE_HOST_KEY_CHECKING=False
-	ansible-playbook -i "amaslakov.com," ./infra/ansible/blog.yml -e "blog_image_version=${TAG}" --tags "deploy" -u ec2-user --key-file "~/.ssh/amaslakov.com.pem" 
+	ansible-playbook -i "amaslakov.com," ./infra/ansible/blog.yml -e "blog_image_version=${TAG}" --tags "deploy" -u ec2-user --key-file "~/.ssh/amaslakov.com.pem"
 
 .PHONY: run
 run:
