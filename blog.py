@@ -1,4 +1,5 @@
 from flask import Flask, escape, request, render_template, redirect
+from flask import Response
 
 app_version = 'v0.1'
 
@@ -29,7 +30,7 @@ def meme():
 
 @app.route('/hc')
 def hc():
-    return Response("{'HealthCheck':'OK'}", status=200, mimetype='application/json')
+    return Response('{"HealthCheck":"OK"}', status=200, mimetype='application/json')
 
 if __name__ == '__main__':
     app.run(host='0.0.0.0', port=8080)

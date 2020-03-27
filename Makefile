@@ -40,4 +40,4 @@ fdeploy:
 
 .PHONY: run
 run:
-	docker run -p 80:80 -it blog:${TAG}
+	docker run -p 80:80 -it ${DOCKER_REPO}/blog:${TAG}
