@@ -6,29 +6,29 @@
     docker_compose_packages: python3-pip
     blog_image_name: amaslak0v/blog
     blog_image_version: ""
-
-  pre_tasks:
-    # The issue is that docker-ce has not been packaged for CentOS 8 yet.
-    - name: "Adding containerd repo for Centos8"
-      yum:
-       name: https://download.docker.com/linux/centos/7/x86_64/stable/Packages/containerd.io-1.2.6-3.3.el7.x86_64.rpm
-      # when: ansible_distribution == "RHEL" and ansible_distribution_major_version == '8'
-
-    - name: "Install python pip"
-      yum:
-        name: python3-pip
-
-    - name: Install awscli
-      pip:
-        name: awscli
-        executable: pip3
-  tags:
-    - install
+    blog_mail: amaslakov.com@gmail.com
+    blog_domain: amaslakov.com
 
   roles:
+    - role: galaxy-pip
+      vars:
+        pip_install_packages:
+          - name: docker
+          - name: docker-compose
+      tags: [install]
     - role: galaxy-docker
       tags: [install]
-    - role: galaxy-docker-compose
+    - role: blog-deployment
       tags: [install]
+    - role: galaxy-certbot
+      vars:
+        certbot_create_if_missing: yes
+        certbot_create_method: standalone
+        certbot_admin_email: "{{ blog_mail }}"
+        domains:
+          - "{{ blog_domain }}"
+        certbot_create_standalone_stop_services:
+          - nginx
+        tags: [install]
     - role: blog-deployment
       tags: [deploy]

@@ -1,10 +1,15 @@
-# Use this file to add roles from git or from Ansible-galaxy
-# usage example: ansible-galaxy install -r galaxy-deps.yml
-#
-#            ansible-playbook -i "${params.INSTANCE}," ./playbooks/run.yml \
-#                    --extra-vars "roles=galaxy-node_exporter host=all" -u ${ssh_user}
-#
-#
+---
+- src: geerlingguy.pip
+  version: master
+  name: galaxy-pip
+
+- src: hispanico.nginx-revproxy
+  version: master
+  name: galaxy-nginx
+
+- src: geerlingguy.certbot
+  version: master
+  name: galaxy-certbot
 
 - src: weareinteractive.docker
   version: master

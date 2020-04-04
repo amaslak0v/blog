@@ -1,6 +1,6 @@
 TAG    := $(shell git --no-pager log -n 1 --pretty=format:'%h-%cd' --date=short ./)
 DOCKER_REPO=amaslak0v
-
+USER=ubuntu
 
 ### Local
 
@@ -9,6 +9,7 @@ init:
 	@echo "Requirements: pip, virtualenv, docker, ansible"
 	virtualenv -p python3.7 venv
 	pip install -r requirements.txt
+	ansible-galaxy install -r infra/ansible/requirements.yml
 
 .PHONY: save-deps
 save-deps:
@@ -30,13 +31,19 @@ deploy: build
 	docker push ${DOCKER_REPO}/blog:${TAG}
 	@echo "Deploying ${DOCKER_REPO}/blog:${TAG}"
 	export ANSIBLE_HOST_KEY_CHECKING=False
-	ansible-playbook -i "amaslakov.com," ./infra/ansible/blog.yml -e "blog_image_version=${TAG}" --tags "deploy" -u ec2-user --key-file "~/.ssh/amaslakov.com.pem"
+	ansible-playbook -i "amaslakov.com," ./infra/ansible/blog.yml -e "blog_image_version=${TAG}" -u ${USER} --key-file "~/.ssh/amaslakov.com.pem" -t deploy
 
-.PHONY: fdeploy
+.PHONY: redeploy
 fdeploy:
 	@echo "Deploying ${DOCKER_REPO}/blog:${TAG}"
 	export ANSIBLE_HOST_KEY_CHECKING=False
-	ansible-playbook -i "amaslakov.com," ./infra/ansible/blog.yml -e "blog_image_version=${TAG}" --tags "deploy" -u ec2-user --key-file "~/.ssh/amaslakov.com.pem"
+	ansible-playbook -i "amaslakov.com," ./infra/ansible/blog.yml -e "blog_image_version=${TAG}" -u ${USER} --key-file "~/.ssh/amaslakov.com.pem" -t deploy
+
+.PHONY: install
+install:
+	@echo "Installing infrastructure"
+	export ANSIBLE_HOST_KEY_CHECKING=False
+	ansible-playbook -i "amaslakov.com," ./infra/ansible/blog.yml -e "blog_image_version=${TAG}" -u ${USER} --key-file "~/.ssh/amaslakov.com.pem" -t install -v
 
 .PHONY: run
 run:

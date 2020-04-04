@@ -1,0 +1,17 @@
+---
+
+- name: Ensure nginx is at the latest version
+  apt: name=nginx state=latest
+
+- name: Setup nginx conf
+  template:
+    src=nginx.conf.j2
+    dest=/etc/nginx/nginx.conf
+  vars:
+    proxy_host: "127.0.0.1"
+    proxy_port: "8080"
+
+- name: start nginx
+  service:
+      name: nginx
+      state: started
