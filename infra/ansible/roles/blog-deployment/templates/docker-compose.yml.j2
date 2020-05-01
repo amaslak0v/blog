@@ -1,9 +1,0 @@
-version: '3'
-services:
-  blog:
-    image: {{ blog_image_name }}:{{ blog_image_version }}
-    restart: always
-    ports:
-      - "8080:80"
-    environment:
-      - VIRTUAL_HOST=amaslakov.com

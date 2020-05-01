@@ -1,8 +1,0 @@
----
-- include_tasks: install.yml
-  tags:
-    - install
-
-- include_tasks: deploy.yml
-  tags:
-    - deploy

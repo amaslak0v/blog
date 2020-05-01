@@ -1,3 +1,0 @@
-base_dir: "/opt/blog"
-nginx_cert_dir: "{{ base_dir }}/certs"
-nginx_proxy_version: latest
